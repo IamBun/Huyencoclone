@@ -171,6 +171,20 @@ process.once('SIGUSR2', () => {
         await dbService.init();
         console.log('[STARTUP] Database initialized successfully.');
 
+        // Serve static files from the frontend/dist directory
+        const path = require('path');
+        const frontendDistPath = path.join(__dirname, '../frontend/dist');
+        app.use(express.static(frontendDistPath));
+
+        // Catch-all route to serve the frontend index.html for SPA support
+        app.get('*', (req, res, next) => {
+            // Skip API routes to avoid confusion (they should have been handled or 404'd)
+            if (req.url.startsWith('/api')) {
+                return next();
+            }
+            res.sendFile(path.join(frontendDistPath, 'index.html'));
+        });
+
         app.listen(PORT, () => {
             console.log(`🚀 BaZi Mega-Evolution API running on port ${PORT}`);
             console.log(`📚 API Docs: http://localhost:${PORT}/api/docs`);
