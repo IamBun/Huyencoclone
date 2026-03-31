@@ -4,6 +4,9 @@
 
 *[🇬🇧 English Version](README.en.md)*
 
+# Huyencoclone
+Clone Huyền cơ bát tự và thêm AI
+
 [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg)]()
 [![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)]()
@@ -326,7 +329,7 @@ tinix-bazi/
 │       │   │   ├── dong_tinh_luan.js   # Đồng Tình Luận
 │       │   │   ├── dich_thien_tuy.js   # Trích Thiên Tùy
 │       │   │   ├── tu_binh_chan_thuyen.js # Tử Bình Chân Thuyên
-│       │   │   ├── benh_duoc.js        # Bệnh Dược
+│       │   │   ├── ben_duoc.js        # Bệnh Dược
 │       │   │   ├── kim_bat_hoan.js     # Kim Bất Hoán
 │       │   │   ├── hinh_hai_pha.js     # Hình Hại Phá
 │       │   │   ├── vong_trang_sinh.js  # Vòng Tràng Sinh
@@ -481,3 +484,121 @@ MIT License — Xem file [LICENSE](LICENSE) để biết thêm chi tiết.
   <b>🏮 Huyền Cơ Bát Tự</b> — Nền tảng mệnh lý học hiện đại<br/>
   <i>huyencobattu.com</i>
 </p>
+|
+| `GET` | `/api/stars` | Phân tích Thần Sát |
+| `GET` | `/api/luck-cycles` | Phân tích Đại Vận |
+| `GET` | `/api/year-analysis` | Phân tích Lưu Niên |
+| `GET` | `/api/auspicious-dates` | Xem ngày tốt xấu |
+
+#### Tham số
+| Param | Type | Required | Mô tả |
+|---|---|---|---|
+| `year` | number | ✅ | Năm sinh |
+| `month` | number | ✅ | Tháng sinh |
+| `day` | number | ✅ | Ngày sinh |
+| `hour` | number | ❌ | Giờ sinh (mặc định: 12) |
+| `minute` | number | ❌ | Phút sinh (mặc định: 0) |
+| `gender` | string | ❌ | "Nam" hoặc "Nữ" (mặc định: "Nam") |
+| `calendar` | string | ❌ | "solar" hoặc "lunar" (mặc định: "solar") |
+
+### AI Consultant
+| Method | Path | Mô tả |
+|---|---|---|
+| `POST` | `/api/consultant/ask` | Hỏi AI tư vấn |
+| `GET` | `/api/consultant/stats` | Thống kê tư vấn |
+| `GET` | `/api/consultant/customers` | Danh sách khách hàng |
+| `GET` | `/api/consultant/history/:id` | Lịch sử tư vấn |
+
+### Authentication
+| Method | Path | Mô tả |
+|---|---|---|
+| `POST` | `/api/auth/register` | Đăng ký tài khoản |
+| `POST` | `/api/auth/login` | Đăng nhập |
+
+### Articles & Admin
+| Method | Path | Mô tả |
+|---|---|---|
+| `GET` | `/api/articles` | Danh sách bài viết |
+| `GET/POST/PUT/DELETE` | `/api/admin/*` | Quản trị hệ thống |
+| `GET/POST` | `/api/que/*` | Xin quẻ & luận giải |
+
+---
+
+## 🧮 Engine Bát Tự
+
+Engine tính toán Bát Tự được xây dựng hoàn toàn bằng JavaScript, bao gồm:
+
+### Tính toán cốt lõi
+- **Can Chi (干支)**: Tính Thiên Can & Địa Chi cho Năm, Tháng, Ngày, Giờ
+- **Tàng Can (藏干)**: Xác định Can ẩn trong mỗi Địa Chi
+- **Thập Thần (十神)**: Tính mối quan hệ 10 thần giữa Nhật Chủ và các Can
+- **Nạp Âm (納音)**: Tra cứu Nạp Âm Ngũ Hành cho mỗi cặp Can Chi
+
+### Phân tích chuyên sâu
+- **Thần Sát (神煞)**: Tính toán 40+ loại Thần Sát (Quý Nhân, Đào Hoa, Dịch Mã, Kiếp Sát...)
+- **Cách Cục (格局)**: Nhận diện cách cục đặc biệt của lá số
+- **Ngũ Hành Điểm Số**: Tính điểm các hành Kim, Mộc, Thủy, Hỏa, Thổ
+- **Vòng Tràng Sinh**: Xác định trạng thái Tràng Sinh, Mộc Dục, Quan Đái...
+
+### Quan hệ Can Chi
+- **Thiên Can**: Hợp, Xung
+- **Địa Chi**: Tam Hợp, Lục Hợp, Lục Xung, Hình, Hại, Phá, Bán Hợp
+
+### Luận giải Kinh Điển
+- **Tử Bình Chân Thuyên** — trích dẫn & áp dụng
+- **Trích Thiên Tùy** — phân tích theo cổ thư
+- **Bệnh Dược Luận** — chẩn đoán bệnh/thuốc của lá số
+- **Đồng Tình Luận** — phân tích khí đồng loại
+- **Kim Bất Hoán** — đánh giá khí chất quý
+
+---
+
+## 🔒 Bảo Mật
+
+- **Helmet.js**: HTTP security headers
+- **Rate Limiting**: 3 tầng giới hạn request
+  - General: 500 req / 15 phút
+  - Auth: 50 req / 15 phút
+  - AI: 15 req / 1 phút
+- **JWT Authentication**: Token-based auth với `jsonwebtoken`
+- **CORS**: Cross-Origin Resource Sharing configuration
+- **Gzip Compression**: Nén response tự động
+- **Access Logging**: Ghi log truy cập vào SQLite (IP, method, path, response time)
+- **Graceful Shutdown**: Đóng database connection an toàn khi shutdown
+
+---
+
+## 🌐 Routes Frontend
+
+| Path | Trang | Mô tả |
+|---|---|---|
+| `/` | Trang chủ | Form nhập thông tin sinh |
+| `/laso` | Lá Số | Hiển thị lá số Bát Tự |
+| `/vanhan` | Vận Hạn | Đại Vận & Lưu Niên |
+| `/phantich` | Phân Tích | Ma trận phân tích |
+| `/dientich` | Điển Tích | Cổ văn luận giải |
+| `/tuvan` | Tư Vấn | AI Consultant |
+| `/duyenso` | Duyên Số | Hợp duyên 2 người |
+| `/xemngay` | Xem Ngày | Xem ngày cá nhân |
+| `/chonngay` | Chọn Ngày | Chọn ngày hoàng đạo |
+| `/xinque` | Xin Quẻ | Gieo quẻ Kinh Dịch |
+| `/lich-su` | Lịch Sử | Lịch sử tư vấn |
+| `/bai-viet/:slug` | Bài Viết | Trang bài viết |
+| `/admin` | Quản Trị | Admin panel |
+
+---
+
+## 📄 License
+
+MIT License — Xem file [LICENSE](LICENSE) để biết thêm chi tiết.
+
+---
+
+<p align="center">
+  <b>🏮 Huyền Cơ Bát Tự</b> — Nền tảng mệnh lý học hiện đại<br/>
+  <i>huyencobattu.com</i>
+</p>
+=======
+# Huyencoclone
+Clone Huyền cơ bát tự và thêm AI 
+>>>>>>> 4222d41903dcefdb0a04d280044e46adc83fccc9
