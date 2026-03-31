@@ -14,7 +14,7 @@
         "start": "npm run start -w backendjs",
         "build": "npm run build -w frontend",
         "install:all": "npm install",
-        "render-build": "npm install && npm run build -w frontend"
+        "render-build": "npm install --include=dev && npm run build -w frontend"
     },
     "devDependencies": {
         "concurrently": "^8.2.2"
