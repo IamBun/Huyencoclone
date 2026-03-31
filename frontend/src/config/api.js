@@ -4,8 +4,8 @@
  */
 
 // Detect if running on production domain
-const isProduction = window.location.hostname === 'huyencobattu.com' ||
-    window.location.hostname === 'www.huyencobattu.com';
+const isProduction = window.location.hostname === 'huyencoclone.onrender.com' ||
+    window.location.hostname === 'www.huyencoclone.onrender.com';
 
 // API Base URL - use Environment Variable in build time, or fallback to auto-detection/localhost
 const API_HOST = import.meta.env.VITE_API_URL || 

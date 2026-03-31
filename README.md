@@ -329,7 +329,7 @@ tinix-bazi/
 │       │   │   ├── dong_tinh_luan.js   # Đồng Tình Luận
 │       │   │   ├── dich_thien_tuy.js   # Trích Thiên Tùy
 │       │   │   ├── tu_binh_chan_thuyen.js # Tử Bình Chân Thuyên
-│       │   │   ├── ben_duoc.js        # Bệnh Dược
+│       │   │   ├── benh_duoc.js        # Bệnh Dược
 │       │   │   ├── kim_bat_hoan.js     # Kim Bất Hoán
 │       │   │   ├── hinh_hai_pha.js     # Hình Hại Phá
 │       │   │   ├── vong_trang_sinh.js  # Vòng Tràng Sinh
